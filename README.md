@@ -6,23 +6,23 @@ We want to make a pricing table for different plans (Month to month, 12/24/36 mo
 ## The Tasks
 
 ### API
-- Complete the work in `save-pricing.ts` by validating the incoming data and saving it to `public/pricing.json`. Note that we are using Joi for validation, you can use it or switch to your own validation framework/way.
-- Return proper errors in case something is wrong with the matrix (ex: int is string or missing mileage package)
+- [ ] Complete the work in `save-pricing.ts` by validating the incoming data and saving it to `public/pricing.json`. Note that we are using Joi for validation, you can use it or switch to your own validation framework/way.
+- [ ] Return proper errors in case something is wrong with the matrix (ex: int is string or missing mileage package)
 
 ### Frontend
-- Design and editable the matrix table
-- Fetch the latest table from the api
-- Add 3 buttons
-- Save: Save the table to the database
-- Clear: Clear the table (all values should be 0)
-- Edit/Cancel: Dynamic button that makes it possible to edit/cancel editing the table.
-- Table should be editable only when you click Edit, othewise, the inputs are disabled.
-- Reset the table to previous state if we click on Cancel.
-- Add an action/actions to handle editing the table. Keep note:
-- When you edit any field not in the "lite" column, the table should just update with that new value.
-- When you edit any value in the "lite" column, the other columns in the same row should update with **x2** and **x3** coefficients. See the example after this list.
-- Save the table and retrieve the latest version.
-- Show errors when validation fails
+- [ ] Design and editable the matrix table
+- [ ] Fetch the latest table from the api
+- [ ] Add 3 buttons
+- [ ] Save: Save the table to the database
+- [ ] Clear: Clear the table (all values should be 0)
+- [ ] Edit/Cancel: Dynamic button that makes it possible to edit/cancel editing the table.
+- [ ] Table should be editable only when you click Edit, othewise, the inputs are disabled.
+- [ ] Reset the table to previous state if we click on Cancel.
+- [ ] Add an action/actions to handle editing the table. Keep note:
+- [ ] When you edit any field not in the "lite" column, the table should just update with that new value.
+- [ ] When you edit any value in the "lite" column, the other columns in the same row should update with **x2** and **x3** coefficients. See the example after this list.
+- [ ] Save the table and retrieve the latest version.
+- [ ] Show errors when validation fails
 
 ### Example editing the table:
 

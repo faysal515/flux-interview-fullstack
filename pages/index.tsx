@@ -1,10 +1,13 @@
 import Head from 'next/head'
 import MatrixTable from '../components/MatrixTable'
+import { useState } from 'react'
+// import data from '/pricing.json'
 
-
-export default function Home() {
+function Home() {
   // You can either fetch the pricing here and pass it to MatrixTable
   // or, you can let MatrixTable handle the fetching
+
+  console.log('HOME CALLING')
 
   return (
     <div className="container">
@@ -14,7 +17,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <MatrixTable />
+        <MatrixTable/>
       </main>
 
       <footer>
@@ -169,3 +172,15 @@ export default function Home() {
     </div>
   )
 }
+
+// export async function getServerSideProps() {
+//   const data = await fetch('http://localhost:3000/api/pricing').then(r => r.json())
+//   return {
+//     props: {
+//       prices: data
+//     }
+//   }
+// }
+
+
+export default Home

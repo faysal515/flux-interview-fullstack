@@ -1,4 +1,5 @@
 import { createContext, useReducer } from 'react'
+import { stat } from 'fs'
 
 /**
  * This is the 
@@ -40,9 +41,20 @@ type MatrixAction = {
    */
   payload?: import('../../types').Matrix
 } | {
-  type: 'SOME_ACTION',
-  payload: any
-} // Here you will need to add your other action(s) in order to edit the pricing (remove SOME_ACTION)
+  type: 'UPDATE_GRID',
+  payload: {
+    tenure: string
+    package: string
+    value: number
+  }
+} | {
+  type: 'MULTIPLY_GRID',
+  payload: {
+    tenure: string
+    scheme: string
+    value: number
+  }
+}
 
 /**
  * This is for the Provider component
@@ -80,29 +92,49 @@ const defaultState: MatrixTableState = {
 }
 
 const reducer = (state: MatrixTableState, action: MatrixAction): MatrixTableState => {
+  const temp = {...state.matrix}
+  console.log('1st: ', state.matrix === state.originalMatrix)
   switch(action.type) {
     case 'SET_MATRIX':
+      console.log('SET_MATRIX ')
+      return {
+        ...state, matrix: action.payload // work left for reset
+      }
+      break
+    case 'SET_ORIGINAL_MATRIX':
+      console.log('SET_ORIGINAL_MATRIX ', action.payload)
+      return {
+        // matrix: action.payload ? action.payload : emptyMatrix,
+        originalMatrix: action.payload ? action.payload : emptyMatrix
+      }
+      break
+    case 'UPDATE_GRID':
+      console.log('UPDATE_GRID')
+      temp[action.payload.tenure][action.payload.scheme] = Number(action.payload.value)
       return {
         ...state,
+        matrix: temp
       }
-    case 'SET_ORIGINAL_MATRIX':
+      break
+    case 'CANCEL_MATRIX':
       return {
-        ...state
+        ...state, matrix: state.originalMatrix
       }
     default:
       return state
   }
 }
 
-export const MatrixTableContext = createContext<[MatrixTableState, import('react').Dispatch<MatrixAction>]>([defaultState, () => {}])
+export const MatrixTableContext = createContext<[MatrixTableState, import('react').Dispatch<MatrixAction>]>(defaultState)
 
 /**
  * This is the provider that hosts the state
  * @param param0 
  */
 export const MatrixTableContextProvider: import('react').FC<ProviderProps> = ({ initialMatrix, children }) => {
+  console.log('provider calling?', initialMatrix)
   const state = useReducer(reducer, { matrix: initialMatrix || emptyMatrix, originalMatrix: initialMatrix || emptyMatrix })
-
+  console.log('^^^ ', JSON.stringify(state))
   return (
     <MatrixTableContext.Provider value={state}>
       {children}
